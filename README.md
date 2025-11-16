@@ -6,7 +6,7 @@ Aplicação de IA para detecção de quedas usando Pose Detection. O sistema uti
 
 Detectar quedas em vídeos utilizando análise de postura com redes neurais convolucionais (YOLOv8-Pose) combinada com algoritmos de classificação (Random Forest, MLP, SVM, KNN, etc).
 
-## 📊 Dataset e Modelos
+## Dataset e Modelos
 
 - **Total de vídeos processados**: 89
 - **Vídeos de queda**: 50
@@ -40,7 +40,7 @@ https://colab.research.google.com/drive/1PExzYAG-rOZkA944bWF10hQI2NA3nNo3#scroll
    - Veja a predição (Queda ou Normal)
    - Veja a probabilidade e as features extraídas
 
-2. ** Resultados do Treinamento**:
+2. **Resultados do Treinamento**:
    - Tabela comparativa de todos os modelos
    - Gráficos de F1-Score
    - Métricas de Accuracy, Precision, Recall
