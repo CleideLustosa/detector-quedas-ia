@@ -16,9 +16,9 @@ from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_sc
 import warnings
 warnings.filterwarnings('ignore')
 
-print("="*70)
+print("\n")
 print("SISTEMA DE DETECCAO DE QUEDAS - PROCESSAMENTO LOCAL")
-print("="*70 + "\n")
+print("\n")
 
 BASE_PATH = r"C:\Users\Família\Downloads\FallDataset"
 OUTPUT_DIR = "./output"
@@ -32,9 +32,9 @@ if not os.path.exists(BASE_PATH):
     print(f"ERRO: Caminho nao encontrado: {BASE_PATH}")
     exit()
 
-print("="*70)
+print("\n")
 print("FASE 1: CARREGAR MODELO YOLOV8-POSE")
-print("="*70 + "\n")
+print("\n")
 
 print("Carregando modelo YOLOv8-Pose...")
 print("(Primeira execucao: vai baixar ~6.5MB)\n")
@@ -110,9 +110,9 @@ def extrair_features_do_video(video_path, model):
     except Exception as e:
         return None
 
-print("="*70)
+print("\n")
 print("FASE 3: ENCONTRAR E PROCESSAR VIDEOS")
-print("="*70 + "\n")
+print("\n")
 
 def encontrar_videos(pasta_raiz, extensoes=['*.mp4', '*.avi', '*.mov', '*.mkv']):
     videos = []
@@ -139,7 +139,7 @@ all_features = []
 quedas_sucesso = 0
 quedas_falha = 0
 
-print("--- Processando videos de QUEDA ---")
+print("Processando videos de QUEDA")
 for video_path in tqdm(videos_quedas, desc="Quedas"):
     features = extrair_features_do_video(video_path, model)
     if features:
@@ -152,7 +152,7 @@ for video_path in tqdm(videos_quedas, desc="Quedas"):
 print(f"OK: Sucessos: {quedas_sucesso}/{len(videos_quedas)}")
 print(f"ERRO: Falhas: {quedas_falha}/{len(videos_quedas)}\n")
 
-print("--- Processando videos NORMAIS ---")
+print("Processando videos NORMAIS")
 normais_sucesso = 0
 normais_falha = 0
 
@@ -168,9 +168,9 @@ for video_path in tqdm(videos_normal, desc="Normais"):
 print(f"OK: Sucessos: {normais_sucesso}/{len(videos_normal)}")
 print(f"ERRO: Falhas: {normais_falha}/{len(videos_normal)}\n")
 
-print("="*70)
+print("\n")
 print("FASE 4: CRIAR DATASET")
-print("="*70 + "\n")
+print("\n")
 
 column_names = ['max_velocidade_vertical', 'media_velocidade_vertical',
                 'diferenca_altura', 'std_altura', 'terminou_horizontal',
@@ -192,9 +192,9 @@ csv_path = os.path.join(OUTPUT_DIR, 'features_de_queda_final.csv')
 df.to_csv(csv_path, index=False)
 print(f"\nOK: Dataset salvo em: {csv_path}\n")
 
-print("="*70)
+print("\n")
 print("FASE 5: PREPARACAO DOS DADOS")
-print("="*70 + "\n")
+print("\n")
 
 X = df.drop('label', axis=1).astype(np.float64)
 y = df['label'].astype(np.int64)
@@ -209,9 +209,9 @@ X_scaled = scaler.fit_transform(X)
 
 print("OK: Dados normalizados\n")
 
-print("="*70)
+print("\n")
 print("FASE 6: TREINAMENTO COM VALIDACAO CRUZADA (5-Fold)")
-print("="*70 + "\n")
+print("\n")
 
 scoring = {
     'accuracy': make_scorer(accuracy_score),
@@ -266,9 +266,9 @@ for nome, modelo in modelos.items():
     except Exception as e:
         print(f"  ERRO: {e}\n")
 
-print("="*70)
+print("\n")
 print("FASE 7: RESULTADOS E COMPARACAO")
-print("="*70 + "\n")
+print("\n")
 
 df_resultados = pd.DataFrame(resultados_cv)
 df_resultados = df_resultados.sort_values('F1-Score_Mean', ascending=False)
@@ -281,9 +281,9 @@ csv_resultados = os.path.join(OUTPUT_DIR, 'resultados_cv_modelos.csv')
 df_resultados.to_csv(csv_resultados, index=False)
 print(f"OK: Resultados salvos em: {csv_resultados}\n")
 
-print("="*70)
+print("\n")
 print("FASE 8: TREINAR MELHOR MODELO")
-print("="*70 + "\n")
+print("\n")
 
 melhor_modelo_nome = df_resultados.iloc[0]['Modelo']
 best_f1 = df_resultados.iloc[0]['F1-Score_Mean']
@@ -296,9 +296,9 @@ best_model.fit(X_scaled, y)
 
 print("OK: Modelo final treinado com todos os dados\n")
 
-print("="*70)
+print("\n")
 print("FASE 9: SALVAR MODELOS")
-print("="*70 + "\n")
+print("\n")
 
 rf_model = RandomForestClassifier(n_estimators=100, max_depth=10, random_state=42, n_jobs=-1)
 rf_model.fit(X_scaled, y)
@@ -315,9 +315,9 @@ print(f"OK: Modelo melhor: {model_path}")
 print(f"OK: Scaler: {scaler_path}")
 print(f"OK: Random Forest: {rf_path}\n")
 
-print("="*70)
+print("\n")
 print("RESUMO FINAL")
-print("="*70 + "\n")
+print("\n")
 
 best_row = df_resultados.iloc[0]
 print(f"MELHOR MODELO: {best_row['Modelo']}")
@@ -334,11 +334,3 @@ print(f"   Normais: {(y==0).sum()}\n")
 
 print(f"Arquivos salvos em: {OUTPUT_DIR}")
 print("\nPROCESSAMENTO CONCLUIDO COM SUCESSO!\n")
-
-print("="*70)
-print("PROXIMOS PASSOS:")
-print("="*70)
-print("\n1. Copie os 3 arquivos .pkl da pasta './output/'")
-print("2. Coloque na pasta do app_quedas.py")
-print("3. Execute: streamlit run app_quedas.py\n")
-
