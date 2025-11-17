@@ -30,6 +30,12 @@ https://colab.research.google.com/drive/1PExzYAG-rOZkA944bWF10hQI2NA3nNo3#scroll
 #### **Passo 2: Instalar Dependências**
 
 #### **Passo 3: Rodar o App**
+print("="*70)
+print("PROXIMOS PASSOS:")
+print("="*70)
+print("\n1. Copie os 3 arquivos .pkl da pasta './output/'")
+print("2. Coloque na pasta do app_quedas.py")
+print("3. Execute: streamlit run app_quedas.py\n")
 
 **O app abrirá no navegador em:** `http://localhost:8501`
 
