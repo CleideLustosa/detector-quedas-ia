@@ -57,3 +57,4 @@ https://colab.research.google.com/drive/1PExzYAG-rOZkA944bWF10hQI2NA3nNo3#scroll
 - `scaler.pkl`: Normalizador
   
 ## Vídeo 
+https://youtu.be/O3pHX3Qhj2E
