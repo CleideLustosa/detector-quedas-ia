@@ -22,7 +22,7 @@ https://colab.research.google.com/drive/1PExzYAG-rOZkA944bWF10hQI2NA3nNo3#scroll
 ### **Opção 2: Rodando Localmente (Python)**
 
 #### **Pré-requisitos**
-- Python 3.12+
+- Python 3.8+
 - pip instalado
 
 #### **Passo 1: Clonar o Repositório**
@@ -50,17 +50,17 @@ https://colab.research.google.com/drive/1PExzYAG-rOZkA944bWF10hQI2NA3nNo3#scroll
    - Métricas de Accuracy, Precision, Recall
 
 ## Principais Tecnologias 
-- `Python 3.8+ (recomendado: 3.9 ou 3.10)
-- `ultralytics==8.3.28  (YOLOv8)
--`torch==2.9.1+cpu
--`torchvision==0.24.1+cpu
--`scikit-learn==1.3.0  (Random Forest, SVM, KNN, MLP)
--`streamlit==1.51.0
--`pandas==2.0.0
--`numpy==1.24.0
--`plotly==5.16.0
--`opencv-python==4.12.0.88
--`joblib==1.3.0
+- Python 3.8+ (recomendado: 3.9 ou 3.10)
+- ultralytics==8.3.28  (YOLOv8)
+- torch==2.9.1+cpu
+- torchvision==0.24.1+cpu
+- scikit-learn==1.3.0  (Random Forest, SVM, KNN, MLP)
+- streamlit==1.51.0
+- pandas==2.0.0
+- numpy==1.24.0
+- plotly==5.16.0
+- opencv-python==4.12.0.88
+- joblib==1.3.0
   
 ## Estrutura do Projeto
 - `app.py`: Interface web com Streamlit
